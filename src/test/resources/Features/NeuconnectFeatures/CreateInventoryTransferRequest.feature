@@ -13,6 +13,7 @@ Feature: CreateInventoryTransferRequest API
     And Extract items code by user id from list all itemcode to test create itr
     And Create itr with valid payload
     And CreateInventoryTransferRequest user id api called
+    And Call itr list api
 
     And isApiHandled is verified as "<isApiHandled>" to test CreateInventoryTransferRequest
     And isRequestSuccess is verified as "<isRequestSuccess>" to test list CreateInventoryTransferRequest

@@ -84,6 +84,17 @@ public class CreateITRSteps {
         this.scenario = scenario;
     }
 
+    public String getGetListITRResponse() {
+        return GetListITRResponse;
+    }
+
+    public void setGetListITRResponse(String getListITRResponse) {
+        GetListITRResponse = getListITRResponse;
+    }
+
+    private String GetListITRResponse;
+
+
     // ---------------- LOGIN ----------------
 
     @Given("A user has logged in access with CreateInventoryTransferRequest")
@@ -108,9 +119,16 @@ public class CreateITRSteps {
 
     @And("Create itr with valid payload")
     public void setBasicData() {
+
         setUom("Manual");
-        setQuantity(10);
+
+        // Random quantity
+        setQuantity((int) (Math.random() * 100) + 1);
+
+        // Static series
         setSeries("199");
+
+        // Unique series name every run
         setSeriesName("TR2026");
     }
 
@@ -123,7 +141,7 @@ public class CreateITRSteps {
 
         setFromWareHouseCode(
                 GenericExtractorsValidators.getLastDetail(
-                        NeuconnectFunction.ListAllWarehouse(getJwtToken()),
+                        NeuconnectFunction.ListAllWarehouse(getAdminToken()),
                         "data.data",
                         "whsCode",
                         "1"
@@ -135,19 +153,20 @@ public class CreateITRSteps {
 
     @And("Extract to warehouse from warehouse list to test create itr")
     public void extractToWarehouse() {
+
         PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+
         setToWareHouseCode(
                 GenericExtractorsValidators.getLastDetail(
-                        NeuconnectFunction.ListAllWarehouse(getJwtToken()),
+                        NeuconnectFunction.ListAllWarehouse(getAdminToken()),
                         "data.data",
                         "whsCode",
-                        "1"
+                        "2"
                 )
         );
 
         PrintUtil.PrintSuccessLog("TO WH: " + getToWareHouseCode());
     }
-
     // ---------------- ITEM ----------------
 
     @And("Extract items code by user id from list all itemcode to test create itr")
@@ -155,14 +174,20 @@ public class CreateITRSteps {
 
         PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
 
+        String response = NeuconnectFunction.listAllItemCodebyUserId(
+                getAdminToken(),
+                getUserId()
+        );
+        System.out.println("ITEM API RESPONSE: " + response);
 
+        String randomIndex = String.valueOf((int)(Math.random() * 5) + 1);
 
         setItemCode(
-                GenericExtractorsValidators.getLastIndexDetail(
-                        NeuconnectFunction.listAllItemCodebyUserId(getAdminToken(),getUserId()),
+                GenericExtractorsValidators.getLastDetail(
+                        response,
                         "data.items",
                         "itemCode",
-                        "1"
+                        randomIndex
                 )
         );
 
@@ -171,7 +196,7 @@ public class CreateITRSteps {
 
     @And("CreateInventoryTransferRequest user id api called")
     public void createITR() {
-
+    PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
         setCreateITRResponse(
                 NeuconnectFunction.CreateInventoryTransferRequest(
                         getJwtToken(),
@@ -226,5 +251,12 @@ public class CreateITRSteps {
                 NeuconnectFunction.ListUsers(getAdminToken()),"data.users","userId","1"
         ));
         PrintUtil.PrintErrorLog("User id extract " + getUserId());
+    }
+
+    @And("Call itr list api")
+    public void callItrListApi() {
+        PrintUtil.PrintErrorLog(envConfig.getEnv("Zamin_PORT"));
+        setGetListITRResponse(NeuconnectFunction.ListAllITRS(getAdminToken()));
+        PrintUtil.PrintSuccessLog(getGetListITRResponse());
     }
 }

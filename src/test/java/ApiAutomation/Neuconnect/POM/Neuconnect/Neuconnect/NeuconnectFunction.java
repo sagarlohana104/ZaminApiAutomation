@@ -192,4 +192,111 @@ public class NeuconnectFunction extends BasePage {
             return err.toString();
         }
     }
+    public static String CreateIT(
+            String bearerToken,
+            String itrId,
+            int quantity,
+            String barCode,
+            String binCode,
+            String series,
+            String seriesName) {
+
+        try {
+
+            JSONObject payload = new JSONObject();
+
+            payload.put("itrId", itrId);
+            payload.put("quantity", quantity);
+            payload.put("barCode", barCode);
+            payload.put("binCode", binCode);
+            payload.put("series", series);
+            payload.put("seriesName", seriesName);
+
+            PrintUtil.PrintSuccessLog("Payload : " + payload.toString());
+
+            return MakeApiCall(
+                    payload.toString(),
+                    Neuconnectendpoints.CreateIT,
+                    bearerToken,
+                    Constants.POST,
+                    false,
+                    "",
+                    ""
+            );
+
+        } catch (Exception err) {
+
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+    public static String ListAllInventoryTransfers(String bearerToken) {
+        try {
+            JSONObject payload = new JSONObject();
+
+
+            return MakeApiCall("", Neuconnectendpoints.ListDirectIT, bearerToken, Constants.GET, false, "", "");
+
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+    public static String CreateTransferReceiveDirect(
+            String bearerToken,
+            String fromWareHouseCode,
+            String toWareHouseCode,
+            String itemCode,
+            int quantity,
+            String barCode,
+            String binCode,
+            String series,
+            String seriesName
+    ) {
+        try {
+
+            JSONObject payload = new JSONObject();
+
+            payload.put("fromWareHouseCode", fromWareHouseCode);
+            payload.put("toWareHouseCode", toWareHouseCode);
+            payload.put("itemCode", itemCode);
+            payload.put("quantity", quantity);
+            payload.put("barCode", barCode);
+            payload.put("binCode", binCode);
+            payload.put("series", series);
+            payload.put("seriesName", seriesName);
+
+            PrintUtil.PrintSuccessLog("Transfer Receive Payload: " + payload.toString());
+
+            return MakeApiCall(
+                    payload.toString(),
+                    Neuconnectendpoints.TransferReceiveDirect,
+                    bearerToken,
+                    Constants.POST,
+                    false,
+                    "",
+                    ""
+            );
+
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+    public static String ListAllTransferReceive(String bearerToken) {
+        try {
+            JSONObject payload = new JSONObject();
+
+
+            return MakeApiCall("", Neuconnectendpoints.ListAllTransferReceive, bearerToken, Constants.GET, false, "", "");
+
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+
+
+
+
 }

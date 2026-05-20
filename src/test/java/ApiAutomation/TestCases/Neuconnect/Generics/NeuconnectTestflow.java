@@ -619,6 +619,44 @@ public class NeuconnectTestflow {
                 NeuconnectFunction.GetDocumentSeries(token,1250000001)
         );
     }
+    @Test
+    public void CreateIT() {
+        String token = AuthGenerics.getJwtToken(Login.login(Credentials.SuperAdminEmail, Credentials.SuperAdminPass));
+        PrintUtil.PrintSuccessLog(token);
+        PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+        PrintUtil.PrintSuccessLog(
+                NeuconnectFunction.CreateIT(token,"",12,"","","","")
+        );
+    }
+    @Test
+    public void ListDirectIT() {
+        String token = AuthGenerics.getJwtToken(Login.login(Credentials.SuperAdminEmail, Credentials.SuperAdminPass));
+        PrintUtil.PrintSuccessLog(token);
+        PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+        PrintUtil.PrintSuccessLog(
+                NeuconnectFunction.ListAllInventoryTransfers(token)
+        );
+    }
+
+    @Test
+    public void TransferReceiveDirect() {
+        String token = AuthGenerics.getJwtToken(Login.login(Credentials.SuperAdminEmail, Credentials.SuperAdminPass));
+        PrintUtil.PrintSuccessLog(token);
+        PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+        PrintUtil.PrintSuccessLog(
+                NeuconnectFunction.CreateTransferReceiveDirect(token,"","","",2,"","","","")
+        );
+    }
+    @Test
+    public void ListAllTransferReceive() {
+        String token = AuthGenerics.getJwtToken(Login.login(Credentials.SuperAdminEmail, Credentials.SuperAdminPass));
+        PrintUtil.PrintSuccessLog(token);
+        PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+        PrintUtil.PrintSuccessLog(
+                NeuconnectFunction.ListAllTransferReceive(token)
+        );
+    }
+
 
 
 }
