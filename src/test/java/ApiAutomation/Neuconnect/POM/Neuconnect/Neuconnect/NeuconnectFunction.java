@@ -295,6 +295,112 @@ public class NeuconnectFunction extends BasePage {
             return err.toString();
         }
     }
+    public static String CreateGoodsIssue(
+            String bearerToken,
+            String whsCode,
+            String itemCode,
+            int quantity,
+            String uoM,
+            String barCode,
+            String binCode,
+            String series,
+            String seriesName
+    ) {
+        try {
+
+            JSONObject payload = new JSONObject();
+
+            payload.put("whsCode",whsCode );
+            payload.put("itemCode", itemCode);
+            payload.put("quantity", quantity);
+            payload.put("uoM",uoM);
+            payload.put("barCode", barCode);
+            payload.put("binCode", binCode);
+            payload.put("series", series);
+            payload.put("seriesName", seriesName);
+
+            PrintUtil.PrintSuccessLog("Goods issue Payload: " + payload.toString());
+
+            return MakeApiCall(
+                    payload.toString(),
+                    Neuconnectendpoints.CreateGoodsisseue,
+                    bearerToken,
+                    Constants.POST,
+                    false,
+                    "",
+                    ""
+            );
+
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+    public static String ListAllGoodIssue(String bearerToken) {
+        try {
+            JSONObject payload = new JSONObject();
+
+
+            return MakeApiCall("", Neuconnectendpoints.ListAllGoodIssue, bearerToken, Constants.GET, false, "", "");
+
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+    public static String ListAllProductionOrders(String bearerToken) {
+        try {
+            JSONObject payload = new JSONObject();
+
+
+            return MakeApiCall("", Neuconnectendpoints.ListAllProductionOrders, bearerToken, Constants.GET, false, "", "");
+
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+    public static String CreateProductionOrderItr(
+            String bearerToken,
+            String fromWareHouseCode,
+            String toWareHouseCode,
+            String documentNumber,
+            int documentAbsoluteEntry,
+            String series,
+            String seriesName,
+            JSONArray items
+    ) {
+        try {
+
+            JSONObject payload = new JSONObject();
+
+            payload.put("fromWareHouseCode", fromWareHouseCode);
+            payload.put("toWareHouseCode", toWareHouseCode);
+            payload.put("documentNumber", documentNumber);
+            payload.put("documentAbsoluteEntry", documentAbsoluteEntry);
+            payload.put("series", series);
+            payload.put("seriesName", seriesName);
+            payload.put("items", items);
+
+            PrintUtil.PrintSuccessLog("Payload : " + payload.toString());
+
+            return MakeApiCall(
+                    payload.toString(),
+                    Neuconnectendpoints.CreateProductionOrderItr,
+                    bearerToken,
+                    Constants.POST,
+                    false,
+                    "",
+                    ""
+            );
+
+        } catch (Exception err) {
+
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+
 
 
 

@@ -19,3 +19,4 @@ Feature: CreateTransferRequest API
     Examples:
       | isApiHandled | isRequestSuccess | statusCode | message |
       | TRUE         | TRUE             | 200        | Success |
+

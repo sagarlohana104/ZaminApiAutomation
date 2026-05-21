@@ -24,6 +24,10 @@ public class Neuconnectendpoints
     public static String ListDirectIT="/ZCAPI/IInventoryTransferFeature/ListAllInventoryTransfers";
     public static String TransferReceiveDirect="/ZCAPI/ITransferReceiveFeature/CreateTransferReceive";
     public static String ListAllTransferReceive="/ZCAPI/ITransferReceiveFeature/ListAllTransferReceive";
+    public static String CreateGoodsisseue="/ZCAPI/IGoodIssueFeature/CreateGoodIssue";
+    public static String ListAllGoodIssue="/ZCAPI/IGoodIssueFeature/ListAllGoodIssue";
+    public static String ListAllProductionOrders="/ZCAPI/IProductionOrderFeature/ListAllProductionOrders";
+    public static String  CreateProductionOrderItr="/ZCAPI/IProductionOrderFeature/CreateProductionOrderItr";
 
 
 
