@@ -28,6 +28,9 @@ public class Neuconnectendpoints
     public static String ListAllGoodIssue="/ZCAPI/IGoodIssueFeature/ListAllGoodIssue";
     public static String ListAllProductionOrders="/ZCAPI/IProductionOrderFeature/ListAllProductionOrders";
     public static String  CreateProductionOrderItr="/ZCAPI/IProductionOrderFeature/CreateProductionOrderItr";
+    public static String CreateSalesOrder="/ZCAPI/ISalesOrderFeature/CreateSalesOrder";
+    public static String ListAllCustomersOfUser="/ZCAPI/IBusinessPartnerFeature/ListAllCustomersOfUser?";
+    public static String ListAllSalesOrder="/ZCAPI/ISalesOrderFeature/ListAllSalesOrder";
 
 
 

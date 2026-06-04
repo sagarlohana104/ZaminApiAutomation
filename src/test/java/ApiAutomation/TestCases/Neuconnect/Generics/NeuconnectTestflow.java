@@ -10,6 +10,7 @@ import ApiAutomation.Neuconnect.Utils.PrintUtil;
 import ApiAutomation.Neuconnect.Utils.env.envConfig;
 
 import io.restassured.RestAssured;
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -188,15 +189,46 @@ public class NeuconnectTestflow {
         );
     }
 
-   /* @Test
+    @Test
     public void CreateProductionOrderItr() {
         String token = AuthGenerics.getJwtToken(Login.login(Credentials.SuperAdminEmail, Credentials.SuperAdminPass));
         PrintUtil.PrintSuccessLog(token);
         PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+        JSONArray ui= new JSONArray();
         PrintUtil.PrintSuccessLog(
-                NeuconnectFunction.CreateProductionOrderItr(token,"","","","","","")
+                NeuconnectFunction.CreateProductionOrderItr(token,"","","",1,"","",ui)
         );
-    }*/
+    }
+    @Test
+    public void CreateSalesorderTest() {
+        String token = AuthGenerics.getJwtToken(Login.login(Credentials.SuperAdminEmail, Credentials.SuperAdminPass));
+        PrintUtil.PrintSuccessLog(token);
+        PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+        JSONArray ui= new JSONArray();
+        PrintUtil.PrintSuccessLog(
+                NeuconnectFunction.CreateSalesOrder(token,"","","",1,"","","",2)
+        );
+    }
+    @Test
+    public void ListAllCustomersOfUser() {
+        String token = AuthGenerics.getJwtToken(Login.login(Credentials.SuperAdminEmail, Credentials.SuperAdminPass));
+        PrintUtil.PrintSuccessLog(token);
+        PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+        JSONArray ui= new JSONArray();
+        PrintUtil.PrintSuccessLog(
+                NeuconnectFunction.ListAllCustomersOfUser(token,"")
+        );
+    }
 
+    @Test
+    public void ListAllSalesOrder() {
+        String token = AuthGenerics.getJwtToken(Login.login(Credentials.SuperAdminEmail, Credentials.SuperAdminPass));
+        PrintUtil.PrintSuccessLog(token);
+        PortUtils.setPort(envConfig.getEnvInteger("Zamin_PORT"));
+        JSONArray ui= new JSONArray();
+        PrintUtil.PrintSuccessLog(
+                NeuconnectFunction.ListAllSalesOrder(token)
+        );
+    }
 
 }

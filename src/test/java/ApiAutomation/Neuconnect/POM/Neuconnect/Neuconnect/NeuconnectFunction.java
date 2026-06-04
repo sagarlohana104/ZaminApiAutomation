@@ -10,6 +10,10 @@ import org.apache.commons.collections4.Put;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.json.JSONArray;
 
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class NeuconnectFunction extends BasePage {
 
     public static String ListUsers(String bearerToken) {
@@ -401,6 +405,85 @@ public class NeuconnectFunction extends BasePage {
         }
     }
 
+
+    public static String CreateSalesOrder(
+            String bearerToken,
+            String customerReferenceId,
+            String whsCode,
+            String itemCode,
+            double quantity,
+            String uoM,
+            String barCode,
+            String binCode,
+            int addDays
+    ) {
+        try {
+
+            JSONObject payload = new JSONObject();
+
+            String deliveryDate = ZonedDateTime
+                    .now(ZoneOffset.UTC)
+                    .plusDays(addDays)
+                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+
+            payload.put("customerReferenceId", customerReferenceId);
+            payload.put("whsCode", whsCode);
+            payload.put("itemCode", itemCode);
+            payload.put("quantity", quantity);
+            payload.put("uoM", uoM);
+            payload.put("barCode", barCode);
+            payload.put("binCode", binCode);
+            payload.put("deliveryDate", deliveryDate);
+
+            PrintUtil.PrintSuccessLog("Payload : " + payload.toString());
+
+            return MakeApiCall(
+                    payload.toString(),
+                    Neuconnectendpoints.CreateSalesOrder,
+                    bearerToken,
+                    Constants.POST,
+                    false,
+                    "",
+                    ""
+            );
+
+        } catch (Exception err) {
+
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+
+    public static String ListAllCustomersOfUser(String bearerToken, String userId) {
+        try {
+            PrintUtil.PrintSuccessLog("userId query param: " + userId);
+            return MakeApiCall(
+                    "",
+                    Neuconnectendpoints.ListAllCustomersOfUser, // already has ? at end
+                    bearerToken,
+                    Constants.GET,
+                    true,
+                    "userId=",
+                    userId
+            );
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
+
+    public static String ListAllSalesOrder(String bearerToken) {
+        try {
+            JSONObject payload = new JSONObject();
+
+
+            return MakeApiCall("", Neuconnectendpoints.ListAllSalesOrder, bearerToken, Constants.GET, false, "", "");
+
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
 
 
 

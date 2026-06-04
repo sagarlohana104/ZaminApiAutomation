@@ -2,6 +2,7 @@ package ApiAutomation.Neuconnect.Utils;
 
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -204,6 +205,22 @@ public class NameUtils
             return ZonedDateTime.now(ZoneOffset.UTC)
                     .plusDays(days)
                     .format(FORMATTER);
+        }
+    }
+
+
+
+
+    public static class DateUtilsDelivery {
+
+        public static String getValidDeliveryDate(int addDays) {
+
+            LocalDateTime dateTime = LocalDateTime.now().plusDays(addDays);
+
+            DateTimeFormatter formatter =
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+            return dateTime.format(formatter);
         }
     }
 

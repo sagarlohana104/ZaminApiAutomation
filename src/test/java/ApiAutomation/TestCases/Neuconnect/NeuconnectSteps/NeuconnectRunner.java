@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/Features/NeuconnectFeatures",
         glue = "ApiAutomation.TestCases.Neuconnect.NeuconnectSteps",
         dryRun = false,
-        tags = "@CreateGoodissue"
+        tags = "@CreateSalesOrder"
 )
 public class NeuconnectRunner
 {

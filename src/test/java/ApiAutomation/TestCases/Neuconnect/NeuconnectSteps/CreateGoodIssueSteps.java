@@ -214,7 +214,6 @@ public class CreateGoodIssueSteps {
 
 
     }
-
     @And("isApiHandled is verified as {string} to test goods issue")
     public void isapihandledIsVerifiedAsToTestGoodsIssue(String arg0) {
         AssertUtils.verifiesToReceiveIsApiHandled(arg0,getCreateGoodissueResp(),scenario.getName());
