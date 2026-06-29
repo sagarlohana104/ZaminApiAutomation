@@ -31,6 +31,7 @@ public class Neuconnectendpoints
     public static String CreateSalesOrder="/ZCAPI/ISalesOrderFeature/CreateSalesOrder";
     public static String ListAllCustomersOfUser="/ZCAPI/IBusinessPartnerFeature/ListAllCustomersOfUser?";
     public static String ListAllSalesOrder="/ZCAPI/ISalesOrderFeature/ListAllSalesOrder";
+    public static String ListDraftedSalesOrderItems="/ZCAPI/ISalesOrderFeature/ListDraftedSalesOrderItems?";
 
 
 

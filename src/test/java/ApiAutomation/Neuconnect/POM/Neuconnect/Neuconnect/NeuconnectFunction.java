@@ -484,8 +484,23 @@ public class NeuconnectFunction extends BasePage {
             return err.toString();
         }
     }
+    public static String ListDraftedSalesOrderItems(String bearerToken,String whsCode, String customerReferenceId , String DeliveryDate) {
+        try {
+            PrintUtil.PrintSuccessLog("whsCode query param: " + whsCode);
+            PrintUtil.PrintSuccessLog("customerReferenceId" + customerReferenceId);
+            PrintUtil.PrintSuccessLog("DeliveryDate" + DeliveryDate);
 
-
-
+            return MakeApiCall("", Neuconnectendpoints.ListDraftedSalesOrderItems, bearerToken, Constants.POST, false, "", "");
+        } catch (Exception err) {
+            PrintUtil.PrintErrorLog(err.toString());
+            return err.toString();
+        }
+    }
 
 }
+
+
+
+
+
+
