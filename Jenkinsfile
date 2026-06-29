@@ -8,4 +8,10 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'target/cucumber-reports/**/*', allowEmptyArchive: true
+        }
+    }
 }
