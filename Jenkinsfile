@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Build & Run Tests') {
             steps {

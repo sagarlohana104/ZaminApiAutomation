@@ -1,5 +1,5 @@
 Feature: All test cases are list all warehouse related endpoint
-
+#sagartest
   @addWarehousetouser
   Scenario Outline: Verify list list all warehouses with valid payload
     Given A user has logged in access with list all addwarehousetouser
